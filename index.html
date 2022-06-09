@@ -2,6 +2,7 @@
 <html>
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
+    
     <script>
           AFRAME.registerComponent('registerevents', {
              init: function () {
@@ -14,6 +15,8 @@
                  });
              }
         });
+        
+        
         let markerVisible = { A: false, B: false, C: false, D: false, F: false };
 
         AFRAME.registerComponent('run', {
@@ -23,11 +26,13 @@
              this.C = document.querySelector("#C");
              this.D = document.querySelector("#D");
              this.F = document.querySelector("#F");
+                 
              this.p0 = new THREE.Vector3();
              this.p1 = new THREE.Vector3();
              this.p2 = new THREE.Vector3();
              this.p3 = new THREE.Vector3();
              this.p4 = new THREE.Vector3();  
+                 
              let material = new THREE.MeshLambertMaterial({color:0xFF0000});
              let geometry=new THREE.CylinderGeometry( 0.05, 0.05, 1, 12);
 
@@ -69,6 +74,7 @@
                      this.cylinderAB.scale.set(1,1,distance);
                      this.cylinderAB.visible = true;
                  }
+                 
                  if ( markerVisible["B"] && markerVisible["C"] ) {
                      this.B.object3D.getWorldPosition(this.p1);
                      this.C.object3D.getWorldPosition(this.p2);
@@ -77,6 +83,7 @@
                      this.cylinderBC.scale.set(1,1,distance);
                      this.cylinderBC.visible = true;
                  }
+                 
                  if ( markerVisible["C"] && markerVisible["D"] ) {
                      this.C.object3D.getWorldPosition(this.p2);
                      this.D.object3D.getWorldPosition(this.p3);
@@ -85,6 +92,7 @@
                      this.cylinderCD.scale.set(1,1,distance);
                      this.cylinderCD.visible = true;
                  }
+                 
                  if ( markerVisible["D"] && markerVisible["F"] ) {
                      this.D.object3D.getWorldPosition(this.p3);
                      this.F.object3D.getWorldPosition(this.p4);
@@ -93,6 +101,7 @@
                      this.cylinderDF.scale.set(1,1,distance);
                      this.cylinderDF.visible = true;                     
                  }
+                 
                  if ( markerVisible["F"] && markerVisible["A"] ) {
                      this.F.object3D.getWorldPosition(this.p4);
                      this.A.object3D.getWorldPosition(this.p0);
@@ -101,6 +110,8 @@
                      this.cylinderFA.scale.set(1,1,distance);
                      this.cylinderFA.visible = true;
                  }
+                 
+                 
                  if ( !markerVisible["A"] )
                     this.cylinderAB.visible = this.cylinderFA.visible = false;
                  if ( !markerVisible["B"] )
@@ -121,22 +132,32 @@
          <a-sphere radius="0.10" color="red"></a-sphere>
          <a-entity id="lineAB"></a-entity>
          </a-marker>
+        
+        
          <a-marker type="pattern" url="https://raw.githubusercontent.com/jeromeetienne/AR.js/master/data/multimarkers/multi-abcdef/patt.b" id="B" registerevents>
          <a-sphere radius="0.10" color="red"></a-sphere>
          <a-entity id="lineBC"></a-entity>
          </a-marker>
+        
+        
          <a-marker type="pattern" url="https://raw.githubusercontent.com/jeromeetienne/AR.js/master/data/multimarkers/multi-abcdef/patt.c" id="C" registerevents>
          <a-sphere radius="0.10" color="red"></a-sphere>
          <a-entity id="lineCD"></a-entity>
          </a-marker>
+        
+        
          <a-marker type="pattern" url="https://raw.githubusercontent.com/jeromeetienne/AR.js/master/data/multimarkers/multi-abcdef/patt.d" id="D" registerevents>
          <a-sphere radius="0.10" color="red"></a-sphere>
          <a-entity id="lineDF"></a-entity>
          </a-marker>
+        
+        
          <a-marker type="pattern" url="https://raw.githubusercontent.com/jeromeetienne/AR.js/master/data/multimarkers/multi-abcdef/patt.f" id="F" registerevents>
          <a-sphere radius="0.10" color="red"></a-sphere>
          <a-entity id="lineFA"></a-entity>
-         </a-marker>         
+         </a-marker>  
+        
+        
          <a-entity camera></a-entity>
          <a-entity run></a-entity>
     </a-scene>
